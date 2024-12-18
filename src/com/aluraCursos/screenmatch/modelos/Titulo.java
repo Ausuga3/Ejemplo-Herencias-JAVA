@@ -8,6 +8,11 @@ public class Titulo {
     private double sumaEvaluaciones;
     private int totalEvaluaciones;
 
+    public Titulo(String nombre, int fechaDeLanzamiento) {
+        this.nombre = nombre;
+        this.fechaDeLanzamiento = fechaDeLanzamiento;
+    }
+
     public int getFechaDeLanzamiento() {
         return fechaDeLanzamiento;
     }

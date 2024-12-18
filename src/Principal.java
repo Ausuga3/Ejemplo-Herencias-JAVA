@@ -4,12 +4,12 @@ import com.aluraCursos.screenmatch.modelos.Episodio;
 import com.aluraCursos.screenmatch.modelos.Pelicula;
 import com.aluraCursos.screenmatch.modelos.Serie;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Principal {
     public static void main(String[] args) {
-        Pelicula miPelicula = new Pelicula();
-        miPelicula.setNombre("Encanto");
-        miPelicula.setFechaDeLanzamiento(2021);
-        miPelicula.setDuracionMinutos(120);
+        Pelicula miPelicula = new Pelicula("Encanto",  2021);
         miPelicula.setIncluidoEnElPlan(true);
 
         miPelicula.muestraFichaTecnica();
@@ -19,19 +19,14 @@ public class Principal {
         System.out.println("Media de evaluaciones de la pelicula: "+ miPelicula.calculaMedia());
 
 
-        Serie casaDragon = new Serie();
-        casaDragon.setNombre("House of dragon");
-        casaDragon.setFechaDeLanzamiento(2022);
+        Serie casaDragon = new Serie("House of dragon", 2022);
         casaDragon.setTemporadas(2);
         casaDragon.setMinutosEpisodio(50);
         casaDragon.setEpisodiosTemporada(10);
         casaDragon.muestraFichaTecnica();
         System.out.println(casaDragon.getDuracionMinutos());
 
-        Pelicula otraPelicula =new Pelicula();
-        otraPelicula.setNombre("Matrix");
-        otraPelicula.setFechaDeLanzamiento(1998);
-        otraPelicula.setDuracionMinutos(180);
+        Pelicula otraPelicula =new Pelicula("Matrix" ,  1999);
 
         CalculadoraDeTiempo calculadora = new CalculadoraDeTiempo();
         calculadora.incluye(miPelicula);
@@ -48,6 +43,29 @@ public class Principal {
         episodio.setSerie(casaDragon);
         episodio.setTotalVisualizacione(50);
         filtroRecomendacion.filtra(episodio);
+
+
+
+        var peliculaDeBruno = new Pelicula("El Señor de los anillos",  2001);
+        var PeliculaAndres = new Pelicula("Avengers", 2012);
+
+
+        ArrayList<Pelicula> listaPelicula = new ArrayList<>();
+        listaPelicula.add(peliculaDeBruno);
+        listaPelicula.add(miPelicula);
+        listaPelicula.add(otraPelicula);
+        listaPelicula.add(PeliculaAndres);
+
+
+        System.out.println("Tamaño de la lista: " + listaPelicula.size());
+        System.out.println("La primera pelicula es: " + listaPelicula.get(0).getNombre());
+        System.out.println(listaPelicula.toString());
+
+        System.out.println("toString de la pelicula: "+ listaPelicula.get(0).toString());
+
+
+
+
 
 
 
