@@ -1,7 +1,12 @@
 package com.aluraCursos.screenmatch.modelos;
 
-public class Titulo {
+import com.aluraCursos.screenmatch.excepcion.ErrorEnConversionDeDuracionExeption;
+import com.google.gson.annotations.SerializedName;
+
+public class Titulo implements Comparable<Titulo> {
+    @SerializedName("Title")
     private String nombre;
+    @SerializedName("Year")
     private int fechaDeLanzamiento;
     private int duracionMinutos;
     private boolean incluidoEnElPlan;
@@ -11,6 +16,16 @@ public class Titulo {
     public Titulo(String nombre, int fechaDeLanzamiento) {
         this.nombre = nombre;
         this.fechaDeLanzamiento = fechaDeLanzamiento;
+    }
+
+    public Titulo(TituloOmbd miTituloOmbd) {
+        this.nombre = miTituloOmbd.title();
+        this.fechaDeLanzamiento = Integer.valueOf(miTituloOmbd.year());
+        if (miTituloOmbd.runtime().contains("N/A")){
+            throw new ErrorEnConversionDeDuracionExeption("No pude convertir la duracion, "
+                    + "porque tiene un N/A");
+        }
+        this.duracionMinutos = Integer.valueOf(miTituloOmbd.runtime().substring(0,3).replace( " ", ""));
     }
 
     public int getFechaDeLanzamiento() {
@@ -63,5 +78,16 @@ public class Titulo {
 
     public double calculaMedia(){
         return sumaEvaluaciones / totalEvaluaciones;
+    }
+
+    @Override
+    public int compareTo(Titulo otroTitulo) {
+        return this.getNombre().compareTo(otroTitulo.getNombre());
+    }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre + "\n" + "Fecha De Lanzamiento: " + fechaDeLanzamiento +
+                "\nDuracion: " + duracionMinutos + " Minutos";
     }
 }
